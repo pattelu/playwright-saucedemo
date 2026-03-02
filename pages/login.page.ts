@@ -15,6 +15,10 @@ export class LoginPage {
     this.errorMessage = page.locator('[data-test="error"]');
   }
 
+  getErrorMessage() {
+    return this.errorMessage;
+  }
+
   async goto() {
     await this.page.goto(process.env.BASE_URL!);
   }
@@ -23,9 +27,5 @@ export class LoginPage {
     await this.usernameInput.fill(username);
     await this.passwordInput.fill(password);
     await this.loginButton.click();
-  }
-
-  async getErrorMessage() {
-    return this.errorMessage.textContent();
   }
 }

@@ -1,4 +1,5 @@
 import { Locator, Page } from 'playwright-core';
+import { expect } from 'playwright/test';
 
 export class InventoryPage {
   readonly page: Page;
@@ -25,9 +26,7 @@ export class InventoryPage {
     this.backToProducts = page.locator('[data-test="back-to-products"]');
   }
 
-  //TBD: addToCart, getTitle, getDescription, getPrice, getImage, openDetailsPage (by image, by name), backToProducts
-
-  productCard(productName: string) {
+  getProductCard(productName: string) {
     return this.page.locator('[data-test="inventory-item"]', {
       has: this.page.locator('[data-test="inventory-item-name"]', {
         hasText: productName,
@@ -35,12 +34,54 @@ export class InventoryPage {
     });
   }
 
-  async addToCart(productName: string) {
-    await this.productCard(productName).locator('.btn_inventory').click();
+  getTitle(productName: string) {
+    return this.getProductCard(productName).locator('[data-test="inventory-item-name"]');
   }
 
-  async addToCartDetailsPage() {
-    await this.inventoryItem.click();
+  getPrice(productName: string) {
+    return this.getProductCard(productName).locator('[data-test="inventory-item-price"]');
+  }
+
+  getDescription(productName: string) {
+    return this.getProductCard(productName).locator('[data-test="inventory-item-desc"]');
+  }
+
+  getImage(productName: string) {
+    return this.getProductCard(productName).locator(`[alt="${productName}"]`);
+  }
+
+  async addToCart(productName: string) {
+    await this.getProductCard(productName).locator('.btn_inventory').click();
+  }
+
+  async removeFromCart(productName: string) {
+    await this.getProductCard(productName).locator('.btn_inventory').click();
+  }
+
+  async addToCartDetailsPage(productName: string) {
+    await this.getProductCard(productName).locator('[data-test="inventory-item-name"]').click();
     await this.addToCartButton.click();
   }
+
+  async openDetailsByTitle(productName: string) {
+    await this.getTitle(productName).click();
+  }
+
+  async openDetailsByImage(productName: string) {
+    await this.getImage(productName).click();
+  }
+
+  async backToListingPage() {
+    await this.backToProducts.click();
+  }
+
+  async onListingPage() {
+    await expect(this.page).toHaveURL(/inventory/);
+  }
+
+  async onDetailsPage() {
+    await expect(this.page).toHaveURL(/inventory-item/);
+  }
 }
+
+// TBD: Cleaning locators

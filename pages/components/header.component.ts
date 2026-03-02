@@ -8,6 +8,7 @@ export class HeaderComponent {
   readonly aboutButton: Locator;
   readonly logoutButton: Locator;
   readonly cartButton: Locator;
+  readonly cartBadge: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -17,6 +18,11 @@ export class HeaderComponent {
     this.aboutButton = page.locator('[data-test="about-sidebar-link"]');
     this.logoutButton = page.locator('[data-test="logout-sidebar-link"]');
     this.cartButton = page.locator('[data-test="shopping-cart-link"]');
+    this.cartBadge = page.locator('[data-test="shopping-cart-badge"]');
+  }
+
+  getCartBadge() {
+    return this.cartBadge;
   }
 
   async allItems() {
