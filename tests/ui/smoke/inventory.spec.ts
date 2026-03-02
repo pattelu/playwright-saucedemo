@@ -2,7 +2,7 @@ import { test, expect } from 'playwright/test';
 import { LoginPage } from '../../../pages/login.page';
 import { InventoryPage } from '../../../pages/inventory.page';
 import { standardUser } from '../../../fixtures/login';
-import { backpack, bikeLight } from '../../../fixtures/products';
+import { backpack } from '../../../fixtures/products';
 import { HeaderComponent } from '../../../pages/components/header.component';
 
 test.describe('products', () => {
@@ -29,7 +29,7 @@ test.describe('products', () => {
     });
 
     test('verify item price', async () => {
-      await expect(inventoryPage.getPrice(bikeLight.name)).toContainText(bikeLight.price);
+      await expect(inventoryPage.getPrice(backpack.name)).toContainText(backpack.price);
     });
 
     test('verify item image', async () => {
@@ -58,7 +58,24 @@ test.describe('products', () => {
       await expect(headerComponent.getCartBadge()).toHaveCount(0);
     });
 
-    // sorting
+    test.describe('sorting products', () => {
+      test('sorting by names Z-A', async () => {
+        await inventoryPage.sortBy('za');
+        await inventoryPage.namesSorted('desc');
+      });
+      test('sorting by names A-Z', async () => {
+        await inventoryPage.sortBy('az');
+        await inventoryPage.namesSorted('asc');
+      });
+      test('sorting by prices high to low', async () => {
+        await inventoryPage.sortBy('hilo');
+        await inventoryPage.pricesSorted('desc');
+      });
+      test('sorting by prices low to high', async () => {
+        await inventoryPage.sortBy('lohi');
+        await inventoryPage.pricesSorted('asc');
+      });
+    });
   });
 
   test.describe('product details', () => {
@@ -73,6 +90,26 @@ test.describe('products', () => {
       await inventoryPage.onListingPage();
     });
 
-    // remove from cart, verify iomage, veryfy desciption, verify price
+    test('remove item from cart', async () => {
+      await inventoryPage.addToCartDetailsPage(backpack.name);
+      await expect(headerComponent.getCartBadge()).toContainText('1');
+      await inventoryPage.removeFromCart(backpack.name);
+      await expect(headerComponent.getCartBadge()).toHaveCount(0);
+    });
+
+    test('verify item description', async () => {
+      await inventoryPage.openDetailsByImage(backpack.name);
+      await expect(inventoryPage.getDescription(backpack.name)).toContainText(backpack.description);
+    });
+
+    test('verify item price', async () => {
+      await inventoryPage.openDetailsByImage(backpack.name);
+      await expect(inventoryPage.getPrice(backpack.name)).toContainText(backpack.price);
+    });
+
+    test('verify item image', async () => {
+      await inventoryPage.openDetailsByImage(backpack.name);
+      await expect(inventoryPage.getImage(backpack.name)).toHaveAttribute('src', backpack.image);
+    });
   });
 });

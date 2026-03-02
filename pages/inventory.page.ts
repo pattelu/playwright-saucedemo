@@ -4,24 +4,16 @@ import { expect } from 'playwright/test';
 export class InventoryPage {
   readonly page: Page;
   readonly addToCartButton: Locator;
-  readonly inventoryItem: Locator;
-  readonly inventoryItemName: Locator;
-  readonly inventoryItemImage: Locator;
-  readonly inventoryDetailImage: Locator;
-  readonly inventoryItemDescription: Locator;
-  readonly inventoryItemPrice: Locator;
+  readonly inventoryItemNames: Locator;
+  readonly inventoryItemPrices: Locator;
   readonly productSort: Locator;
   readonly backToProducts: Locator;
 
   constructor(page: Page) {
     this.page = page;
     this.addToCartButton = page.locator('.btn_inventory');
-    this.inventoryItem = page.locator('[data-test="inventory-item"]');
-    this.inventoryItemName = page.locator('[data-test="inventory-item-name"]');
-    this.inventoryItemImage = page.locator('.inventory_item_img');
-    this.inventoryDetailImage = page.locator('.inventory_details_img_container');
-    this.inventoryItemDescription = page.locator('[data-test="inventory-item-desc"]');
-    this.inventoryItemPrice = page.locator('[data-test="inventory-item-price"]');
+    this.inventoryItemNames = page.locator('[data-test="inventory-item-name"]');
+    this.inventoryItemPrices = page.locator('[data-test="inventory-item-price"]');
     this.productSort = page.locator('[data-test="product-sort-container"]');
     this.backToProducts = page.locator('[data-test="back-to-products"]');
   }
@@ -48,6 +40,41 @@ export class InventoryPage {
 
   getImage(productName: string) {
     return this.getProductCard(productName).locator(`[alt="${productName}"]`);
+  }
+
+  async getAllItemNames() {
+    return await this.inventoryItemNames.allTextContents();
+  }
+
+  async getAllPrices() {
+    const prices = await this.inventoryItemPrices.allTextContents();
+    return prices.map((p) => parseFloat(p.replace('$', '')));
+  }
+
+  async namesSorted(order = 'asc') {
+    const names = await this.getAllItemNames();
+    let sorted = [...names];
+    if (order === 'asc') {
+      sorted.sort((a, b) => a.localeCompare(b));
+    } else {
+      sorted.sort((a, b) => b.localeCompare(a));
+    }
+    expect(names).toEqual(sorted);
+  }
+
+  async pricesSorted(order = 'asc') {
+    const prices = await this.getAllPrices();
+    let sorted = [...prices];
+    if (order === 'asc') {
+      sorted.sort((a, b) => a - b);
+    } else {
+      sorted.sort((a, b) => b - a);
+    }
+    expect(prices).toEqual(sorted);
+  }
+
+  async sortBy(sort: string) {
+    await this.productSort.selectOption(sort);
   }
 
   async addToCart(productName: string) {
@@ -83,5 +110,3 @@ export class InventoryPage {
     await expect(this.page).toHaveURL(/inventory-item/);
   }
 }
-
-// TBD: Cleaning locators

@@ -1,3 +1,5 @@
+// For now not in use
+
 import { test as setup, expect } from '@playwright/test';
 import { LoginPage } from '../pages/login.page';
 import { standardUser } from '../fixtures/login';
