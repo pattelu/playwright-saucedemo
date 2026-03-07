@@ -9,3 +9,8 @@ export const errorCheckout = {
   lastName: 'Error: Last Name is required',
   postalCode: 'Error: Postal Code is required',
 };
+
+export const checkoutConfirmation = {
+  header: 'Thank you for your order!',
+  text: 'Your order has been dispatched, and will arrive just as fast as the pony can get there!',
+};

@@ -1,9 +1,9 @@
 import { test, expect } from 'playwright/test';
-import { LoginPage } from '../../../pages/login.page';
-import { InventoryPage } from '../../../pages/inventory.page';
-import { standardUser } from '../../../fixtures/login';
-import { backpack } from '../../../fixtures/products';
-import { HeaderComponent } from '../../../pages/components/header.component';
+import { LoginPage } from '../pages/login.page';
+import { InventoryPage } from '../pages/inventory.page';
+import { standardUser } from '../fixtures/login';
+import { backpack } from '../fixtures/products';
+import { HeaderComponent } from '../pages/components/header.component';
 
 test.describe('products', () => {
   let loginPage: LoginPage;
