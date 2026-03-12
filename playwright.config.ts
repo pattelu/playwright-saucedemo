@@ -38,8 +38,8 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'],
-        launchOptions: {
-          executablePath: "/usr/bin/chromium",
+        launchOptions: process.env.CI ? {} : {
+          executablePath: '/usr/bin/chromium',
         },
       },
     },
@@ -47,8 +47,8 @@ export default defineConfig({
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'],
-        launchOptions: {
-          executablePath: "/usr/bin/firefox",
+        launchOptions: process.env.CI ? {} : {
+          executablePath: '/usr/bin/firefox',
         },
       },
     },
