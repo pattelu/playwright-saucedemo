@@ -14,6 +14,7 @@ jobs:
       LOCKED_OUT_USER: ${{ secrets.LOCKED_OUT_USER }}
       PASSWORD: ${{ secrets.PASSWORD }}
       API_URL: ${{ secrets.API_URL }}
+      USER_AGENT: github-actions-playwright
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
