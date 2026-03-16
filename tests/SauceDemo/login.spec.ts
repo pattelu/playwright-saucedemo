@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pages/login.page';
-import { lockedOutUser, standardUser, errorMessages } from '../fixtures/login';
-import { InventoryPage } from '../pages/inventory.page';
+import { LoginPage } from '../../src/pages/login.page';
+import { lockedOutUser, standardUser, errorMessages } from '../../src/fixtures/login';
+import { InventoryPage } from '../../src/pages/inventory.page';
 
 test.describe('login tests', () => {
   let loginPage: LoginPage;

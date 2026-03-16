@@ -1,8 +1,8 @@
 // For now not in use
 
 import { test as setup, expect } from '@playwright/test';
-import { LoginPage } from '../pages/login.page';
-import { standardUser } from '../fixtures/login';
+import { LoginPage } from '../../src/pages/login.page';
+import { standardUser } from '../../src/fixtures/login';
 
 setup('authenticate as standard user', async ({ page }) => {
   const loginPage = new LoginPage(page);

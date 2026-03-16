@@ -1,11 +1,11 @@
 import test, { expect } from 'playwright/test';
-import { LoginPage } from '../pages/login.page';
-import { InventoryPage } from '../pages/inventory.page';
-import { HeaderComponent } from '../pages/components/header.component';
-import { CartPage } from '../pages/cart.page';
-import { standardUser } from '../fixtures/login';
-import { backpack, bikeLight } from '../fixtures/products';
-import { CheckoutPage } from '../pages/checkout.page';
+import { LoginPage } from '../../src/pages/login.page';
+import { InventoryPage } from '../../src/pages/inventory.page';
+import { HeaderComponent } from '../../src/pages/header.component';
+import { CartPage } from '../../src/pages/cart.page';
+import { standardUser } from '../../src/fixtures/login';
+import { backpack, bikeLight } from '../../src/fixtures/products';
+import { CheckoutPage } from '../../src/pages/checkout.page';
 
 test.describe('cart', () => {
   let loginPage: LoginPage;

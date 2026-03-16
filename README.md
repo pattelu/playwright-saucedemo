@@ -4,3 +4,5 @@ docker compose up
 ```
 
 As this is an example project and the credentials are public, it contains .env settings directly in docker-compose.yml.
+
+_I am working on API tests, which are currently not included in docker compose setup._
