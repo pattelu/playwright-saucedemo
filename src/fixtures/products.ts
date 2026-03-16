@@ -1,3 +1,4 @@
+// Sauce Demo
 export const backpack = {
   name: 'Sauce Labs Backpack',
   description:
@@ -45,3 +46,18 @@ export const tShirtRed = {
   price: '$15.99',
   image: '/static/media/red-tatt-1200x1500.30dadef477804e54fc7b.jpg',
 };
+
+
+// FakeStoreAPI
+export const newProduct = {
+  title: 'Test Product',
+  price: 10.99,
+  description: 'Test description for test product.',
+  category: "men's clothing",
+  image: 'http://example.com',
+};
+
+export const updateProduct = {
+  price: 20.99,
+  description: 'Updated test description for test product.',
+}
