@@ -13,6 +13,7 @@ jobs:
       STANDARD_USER: ${{ secrets.STANDARD_USER }}
       LOCKED_OUT_USER: ${{ secrets.LOCKED_OUT_USER }}
       PASSWORD: ${{ secrets.PASSWORD }}
+      API_URL: ${{ secrets.API_URL }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
