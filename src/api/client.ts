@@ -7,7 +7,9 @@ export class ApiClient {
         this.context = await request.newContext({
             baseURL: process.env.API_URL,
             extraHTTPHeaders: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'User-Agent': process.env.USER_AGENT || 'playwright-tests'
             }
         });
     }
