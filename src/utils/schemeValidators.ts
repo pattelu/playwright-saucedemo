@@ -18,3 +18,11 @@ export function validateProduct(product: any) {
     }
     expect(product).toEqual(expect.objectContaining(baseValidation));
 }
+
+export function validateCart(cart: any){
+    expect(cart).toEqual(expect.objectContaining({
+        id: expect.any(Number),
+        userId: expect.any(Number),
+        products: expect.any(Object),
+    }))
+}

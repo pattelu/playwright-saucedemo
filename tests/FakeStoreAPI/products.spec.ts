@@ -1,10 +1,8 @@
 import { test, expect } from "playwright/test";
 import { ApiClient } from "../../src/api/client";
 import { ProductsApi } from "../../src/api/endpoints/products";
-import { Product } from "../../src/types/product";
 import { newProduct, updateProduct } from "../../src/fixtures/products";
 import { validateProduct } from "../../src/utils/schemeValidators";
-import { error } from "node:console";
 
 test.describe('products api', () => {
     let productsApi: ProductsApi;
