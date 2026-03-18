@@ -1,5 +1,5 @@
 import { ApiClient } from "../client";
-import { Product } from "../../types/product";
+import { Product } from "../../types/productTypes";
 
 export class ProductsApi {
     private productsUrl: string;

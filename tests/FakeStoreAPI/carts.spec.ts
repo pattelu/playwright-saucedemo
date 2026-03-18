@@ -1,7 +1,7 @@
 import { test, expect } from "playwright/test";
 import { ApiClient } from "../../src/api/client";
 import { CartsApi } from "../../src/api/endpoints/carts";
-import { newCart, updateCart } from "../../src/fixtures/carts";
+import { newCartData, updateCartData } from "../../src/fixtures/carts";
 import { validateCart } from "../../src/utils/schemeValidators";
 
 test.describe('carts api', () => {
@@ -25,27 +25,27 @@ test.describe('carts api', () => {
     });
 
     test('POST add new cart', async () => {
-        const addNewCart = await cartsApi.createCart(newCart);
+        const addNewCart = await cartsApi.createCart(newCartData);
         validateCart(addNewCart);
 
-        expect(addNewCart.userId).toBe(newCart.userId);
-        expect(addNewCart.products[0].id).toBe(newCart.products[0].id);
+        expect(addNewCart.userId).toBe(newCartData.userId);
+        expect(addNewCart.products[0].id).toBe(newCartData.products[0].id);
     });
 
     test('PUT update a cart', async () => {
-        const addNewCart = await cartsApi.createCart(newCart);
+        const addNewCart = await cartsApi.createCart(newCartData);
         validateCart(addNewCart);
-        const updateExistingCart = await cartsApi.updateCart(addNewCart.id, updateCart);
+        const updateExistingCart = await cartsApi.updateCart(addNewCart.id, updateCartData);
         const updatedCart = {...addNewCart, ...updateExistingCart};
         validateCart(updatedCart);
 
-        expect(updatedCart.userId).toBe(updateCart.userId)
-        expect(updatedCart.products[0].id).toBe(newCart.products[0].id);
-        expect(updatedCart.products[1].price).toBe(newCart.products[1].price);
+        expect(updatedCart.userId).toBe(updateCartData.userId)
+        expect(updatedCart.products[0].id).toBe(newCartData.products[0].id);
+        expect(updatedCart.products[1].price).toBe(newCartData.products[1].price);
     });
 
     test('DELETE cart', async () => {
-        const addNewCart = await cartsApi.createCart(newCart);
+        const addNewCart = await cartsApi.createCart(newCartData);
         validateCart(addNewCart);
         await cartsApi.deleteCart(addNewCart.id);
     });

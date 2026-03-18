@@ -1,4 +1,4 @@
-export const newCart = {
+export const newCartData = {
   userId: 1,
   products: [
         {
@@ -11,6 +11,6 @@ export const newCart = {
     ]   
 };
 
-export const updateCart = {
+export const updateCartData = {
     userId: 2,
 };

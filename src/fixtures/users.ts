@@ -7,3 +7,8 @@ export const newUserData = {
 export const updateUserData = {
     password: "updatedPassword",
 };
+
+export const loginData = {
+    username: "johnd",
+    password: "m38rmF$",
+};

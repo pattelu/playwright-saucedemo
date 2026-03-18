@@ -1,4 +1,4 @@
-import { Cart } from "../../types/cart";
+import { Cart } from "../../types/cartTypes";
 import { ApiClient } from "../client";
 
 export class CartsApi {

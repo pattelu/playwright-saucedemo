@@ -49,7 +49,7 @@ export const tShirtRed = {
 
 
 // FakeStoreAPI
-export const newProduct = {
+export const newProductData = {
   title: 'Test Product',
   price: 10.99,
   description: 'Test description for test product.',
@@ -57,7 +57,7 @@ export const newProduct = {
   image: 'http://example.com',
 };
 
-export const updateProduct = {
+export const updateProductData = {
   price: 20.99,
   description: 'Updated test description for test product.',
 }

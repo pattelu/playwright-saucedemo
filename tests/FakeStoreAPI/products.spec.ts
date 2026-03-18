@@ -1,7 +1,7 @@
 import { test, expect } from "playwright/test";
 import { ApiClient } from "../../src/api/client";
 import { ProductsApi } from "../../src/api/endpoints/products";
-import { newProduct, updateProduct } from "../../src/fixtures/products";
+import { newProductData, updateProductData } from "../../src/fixtures/products";
 import { validateProduct } from "../../src/utils/schemeValidators";
 
 test.describe('products api', () => {
@@ -25,28 +25,28 @@ test.describe('products api', () => {
     });
 
     test('POST create new product', async () => {
-        const createdNewProduct = await productsApi.createProduct(newProduct);
+        const createdNewProduct = await productsApi.createProduct(newProductData);
         validateProduct(createdNewProduct);
 
-        expect(createdNewProduct.title).toBe(newProduct.title);
-        expect(createdNewProduct.price).toBe(newProduct.price);
+        expect(createdNewProduct.title).toBe(newProductData.title);
+        expect(createdNewProduct.price).toBe(newProductData.price);
     });
 
     test('PUT update a prodcut', async () => {
-        const createdNewProduct = await productsApi.createProduct(newProduct);
+        const createdNewProduct = await productsApi.createProduct(newProductData);
         validateProduct(createdNewProduct);
-        const updateExistingProduct = await productsApi.updateProduct(createdNewProduct.id, updateProduct);
+        const updateExistingProduct = await productsApi.updateProduct(createdNewProduct.id, updateProductData);
         const updatedProduct = {...createdNewProduct, ...updateExistingProduct};
         validateProduct(updatedProduct);
 
-        expect(updatedProduct.description).toBe(updateProduct.description)
-        expect(updatedProduct.price).toBe(updateProduct.price);
-        expect(updatedProduct.title).toBe(newProduct.title);
-        expect(updatedProduct.category).toBe(newProduct.category);
+        expect(updatedProduct.description).toBe(updateProductData.description)
+        expect(updatedProduct.price).toBe(updateProductData.price);
+        expect(updatedProduct.title).toBe(newProductData.title);
+        expect(updatedProduct.category).toBe(newProductData.category);
     });
 
     test('DELETE product', async () => {
-        const createdNewProduct = await productsApi.createProduct(newProduct);
+        const createdNewProduct = await productsApi.createProduct(newProductData);
         validateProduct(createdNewProduct);
         await productsApi.deleteProduct(createdNewProduct.id);
     });

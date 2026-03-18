@@ -15,7 +15,7 @@ export function validateProduct(product: any) {
             rate: expect.any(Number),
             count: expect.any(Number),
         });
-    }
+    };
     expect(product).toEqual(expect.objectContaining(baseValidation));
 }
 
@@ -24,7 +24,7 @@ export function validateCart(cart: any){
         id: expect.any(Number),
         userId: expect.any(Number),
         products: expect.any(Object),
-    }))
+    }));
 }
 
 export function validateUser(user: any) {
@@ -33,5 +33,5 @@ export function validateUser(user: any) {
         username: expect.any(String),
         email: expect.any(String),
         password: expect.any(String),
-    }))
+    }));
 }

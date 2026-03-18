@@ -1,8 +1,7 @@
 import { test, expect } from "playwright/test";
 import { ApiClient } from "../../src/api/client";
-import { validateUser } from "../../src/utils/schemeValidators";
 import { UsersApi } from "../../src/api/endpoints/users";
-import { newUserData, updateUserData } from "../../src/fixtures/usersData";
+import { newUserData, updateUserData } from "../../src/fixtures/users";
 
 test.describe('users api', () => {
     let usersApi: UsersApi;
