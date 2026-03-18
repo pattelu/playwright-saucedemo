@@ -26,3 +26,12 @@ export function validateCart(cart: any){
         products: expect.any(Object),
     }))
 }
+
+export function validateUser(user: any) {
+    expect(user).toEqual(expect.objectContaining({
+        id: expect.any(Number),
+        username: expect.any(String),
+        email: expect.any(String),
+        password: expect.any(String),
+    }))
+}
